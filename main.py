@@ -33,6 +33,28 @@ def get_symbols():
 
   return symbols
 
+
+def get_previous_closeValue(symbols):
+  """
+  Feacth data from the API to each symbol.
+  Parse data from html into a beautifulsoup object.
+  Scrap the content for the Stock Previous Close Value;
+  Returns:
+    previous_close_values(list): A list with the previous close value to each stock.
+  """
+  previous_close_values = [] 
+  
+  for symbol in symbols:
+    response = fetch_data_from_api(f'https://finance.yahoo.com/quote/{symbol}?p={symbol}tsrc=fin-srch')    
+    page  = BeautifulSoup(response, 'html.parser')
+    previous_close_value = page.find('td', {'data-test':"PREV_CLOSE-value"})
+    previous_close_values.append(float(previous_close_value.text))
+
+  print("Got all previous close values.")
+
+  return previous_close_values
+
 if __name__ == '__main__':
 
     ticker_values = get_symbols()
+    previous_close_values = get_previous_closeValue(ticker_values)
