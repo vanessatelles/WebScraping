@@ -78,8 +78,35 @@ def moving_average(symbols):
 
   return moving_average_values
 
+def create_data_frame(ticker_values, previous_close_values, moving_average_values):
+    """
+        Method to format the processed data as a dataframe. 
+        Create a column called "is_cheap".
+        And plot a bar graph with only the values where the "is_cheap" is True.
+        
+        Args:
+          ticker_values(list): A list with each stock symbol.
+          previous_close_values(list): A list with each stock previous close value.
+          moving_average_values(list): A list with each stock moving average value.
+    """
+    df = pd.DataFrame(list(zip(previous_close_values, ticker_values)),
+                columns =['Previous Close', 'Ticker'])
+
+    df['200-Day Moving Average 3'] = moving_average_values
+    df['is_cheap'] = np.where(df['Previous Close'] < df['200-Day Moving Average 3'], True, False)
+
+    condition = df['is_cheap'] == True
+
+    hist = df[condition].plot(kind='bar', x='Ticker', y='Previous Close').get_figure()
+    hist.savefig('plot.png')
+
+    print("The plot was save as an image named plot.png")
+
+    return 
+
 if __name__ == '__main__':
 
     ticker_values = get_symbols()
     previous_close_values = get_previous_closeValue(ticker_values)
     moving_average_values = moving_average(ticker_values)
+    create_data_frame(ticker_values, previous_close_values, moving_average_values)
