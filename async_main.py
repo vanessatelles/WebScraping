@@ -30,5 +30,18 @@ async def get_symbols():
 
     return symbols
 
+async def previous_close(symbols):
+
+    previous_close_values = []
+    for symbol in symbols:
+        url = f'https://finance.yahoo.com/quote/{symbol}?p={symbol}tsrc=fin-srch'
+        response = await fetch_data_from_api(url)
+        page  = BeautifulSoup(response, 'html.parser')
+        previous_close_value = page.find('td', {'data-test':"PREV_CLOSE-value"})
+        previous_close_values.append(float(previous_close_value.text))
+        #print(f"P: {previous_close_value.text}")
+    print("Got all previous close values.")
+    return previous_close_values
+
 if __name__ == '__main__':
     print("start")
