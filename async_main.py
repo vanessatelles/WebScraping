@@ -43,5 +43,22 @@ async def previous_close(symbols):
     print("Got all previous close values.")
     return previous_close_values
 
+async def moving_average(symbols):
+
+    moving_average_values = []
+
+    for symbol in symbols:
+        url = f'https://finance.yahoo.com/quote/{symbol}/key-statistics?p={symbol}'
+        response = await fetch_data_from_api(url)
+        page  = BeautifulSoup(response, 'html.parser')
+        two_columns = page.find('div',{'id':'Col1-0-KeyStatistics-Proxy'})
+        right_column = two_columns.find('div', {'class':'Fl(end) W(50%) smartphone_W(100%)'})
+        td = right_column.find_all('td',{'class':'Fw(500) Ta(end) Pstart(10px) Miw(60px)'})
+        moving_average_value = td[6]
+        #print(f"M: {moving_average_value.text}")
+        moving_average_values.append(float(moving_average_value.text))
+    print("Got all moving average values.")
+    return moving_average_values
+
 if __name__ == '__main__':
     print("start")
