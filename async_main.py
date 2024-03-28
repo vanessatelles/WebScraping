@@ -60,5 +60,12 @@ async def moving_average(symbols):
     print("Got all moving average values.")
     return moving_average_values
 
+async def get_stock_value():
+
+    ticker_values = await get_symbols()
+    print("Got all tickers.")
+    previous_close_values, moving_average_values = await asyncio.gather(previous_close(ticker_values), moving_average(ticker_values))
+    return ticker_values, previous_close_values, moving_average_values
+
 if __name__ == '__main__':
-    print("start")
+    stock_values = asyncio.run(get_stock_value())
