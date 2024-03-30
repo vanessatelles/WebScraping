@@ -5,7 +5,13 @@ from bs4 import BeautifulSoup
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'}
 
 async def fetch_data_from_api(url):
+    """
+    Async function to call the API and fetch data from the endpoint.
+    It raises an except if time out.   
 
+    Returns:
+        response(text): Data received from the API.
+    """
     conn = aiohttp.TCPConnector(limit=50)  # allows 50 concurrent connections
     timeout = aiohttp.ClientTimeout(total=20)  # timeout duration 
     
@@ -19,7 +25,13 @@ async def fetch_data_from_api(url):
             print("Request timed out.")
 
 async def get_symbols():
+    """
+    Async function to parse data from the html into a beautifulsoup object.
+    Scrap the content for the stock symbols. 
 
+    Returns:
+        symbols(list): A list of the first 50 symbols in the S&P 500 companies table.
+    """
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     response = await fetch_data_from_api(url)
     # parse data from the html into a beautifulsoup object
