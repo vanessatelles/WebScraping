@@ -25,7 +25,13 @@ async def fetch_data_from_api(url):
             print("Request timed out.")
 
 async def get_symbols():
+    """
+    Async function to parse data from the html into a beautifulsoup object.
+    Scrap the content for the stock symbols. 
 
+    Returns:
+        symbols(list): A list of the first 50 symbols in the S&P 500 companies table.
+    """
     url = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     response = await fetch_data_from_api(url)
     # parse data from the html into a beautifulsoup object
