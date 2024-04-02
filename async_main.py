@@ -43,7 +43,14 @@ async def get_symbols():
     return symbols
 
 async def previous_close(symbols):
+    """
+    Async function to feacth data from the API to each symbol.
+    Parse data from html into a beautifulsoup object.
+    Scrap the content for the Stock Previous Close Value;
 
+    Returns:
+        previous_close_values(list): A list with the previous close value to each stock.
+    """
     previous_close_values = []
     for symbol in symbols:
         url = f'https://finance.yahoo.com/quote/{symbol}?p={symbol}tsrc=fin-srch'
@@ -56,7 +63,14 @@ async def previous_close(symbols):
     return previous_close_values
 
 async def moving_average(symbols):
+    """
+    Async function to feacth data from the API to each symbol.
+    Parse data from html into a beautifulsoup object.
+    Scrap the content for the Stock 200-Day Moving Average value.
 
+    Returns:
+        moving_average_values(list): A list with the moving average value to each stock.
+    """
     moving_average_values = []
 
     for symbol in symbols:
