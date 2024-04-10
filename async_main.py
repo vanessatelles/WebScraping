@@ -87,7 +87,15 @@ async def moving_average(symbols):
     return moving_average_values
 
 async def get_stock_value():
+    """
+    Async function to await for the get_symbols to finish. 
+    And run both previous_close and moving_avera function concurrently and collect their results.
 
+    Returns:
+        tuple[list,list,list]: A tuple with three elements, 
+                               the stock symbols list,
+                               the previous close values list and moving average values list.
+    """
     ticker_values = await get_symbols()
     print("Got all tickers.")
     previous_close_values, moving_average_values = await asyncio.gather(previous_close(ticker_values), moving_average(ticker_values))
