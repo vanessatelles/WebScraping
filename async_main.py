@@ -129,3 +129,7 @@ def create_data_frame(ticker_values, previous_close_values, moving_average_value
 
 if __name__ == '__main__':
     stock_values = asyncio.run(get_stock_value())
+    
+    ticker_values, previous_close_values, moving_average_values = stock_values[0], stock_values[1], stock_values[2]
+
+    create_data_frame(ticker_values,previous_close_values, moving_average_values)
