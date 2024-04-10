@@ -102,7 +102,16 @@ async def get_stock_value():
     return ticker_values, previous_close_values, moving_average_values
 
 def create_data_frame(ticker_values, previous_close_values, moving_average_values):
+    """
+        Method to format the processed data as a dataframe. 
+        Create a column called "is_cheap".
+        And plot a bar graph with only the values where the "is_cheap" is True.
 
+        Args:
+          ticker_values(list): A list with each stock symbol.
+          previous_close_values(list): A list with each stock previous close value.
+          moving_average_values(list): A list with each stock moving average value.
+    """
     df = pd.DataFrame(list(zip(previous_close_values, ticker_values)),
                 columns =['Previous Close', 'Ticker'])
 
