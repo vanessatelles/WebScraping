@@ -87,11 +87,49 @@ async def moving_average(symbols):
     return moving_average_values
 
 async def get_stock_value():
+    """
+    Async function to await for the get_symbols to finish. 
+    And run both previous_close and moving_avera function concurrently and collect their results.
 
+    Returns:
+        tuple[list,list,list]: A tuple with three elements, 
+                               the stock symbols list,
+                               the previous close values list and moving average values list.
+    """
     ticker_values = await get_symbols()
     print("Got all tickers.")
     previous_close_values, moving_average_values = await asyncio.gather(previous_close(ticker_values), moving_average(ticker_values))
     return ticker_values, previous_close_values, moving_average_values
 
+def create_data_frame(ticker_values, previous_close_values, moving_average_values):
+    """
+        Method to format the processed data as a dataframe. 
+        Create a column called "is_cheap".
+        And plot a bar graph with only the values where the "is_cheap" is True.
+
+        Args:
+          ticker_values(list): A list with each stock symbol.
+          previous_close_values(list): A list with each stock previous close value.
+          moving_average_values(list): A list with each stock moving average value.
+    """
+    df = pd.DataFrame(list(zip(previous_close_values, ticker_values)),
+                columns =['Previous Close', 'Ticker'])
+
+    df['200-Day Moving Average 3'] = moving_average_values
+    df['is_cheap'] = np.where(df['Previous Close'] < df['200-Day Moving Average 3'], True, False)
+
+    condition = df['is_cheap'] == True
+
+    hist = df[condition].plot(kind='bar', x='Ticker', y='Previous Close').get_figure()
+    hist.savefig('async_plot.png')
+
+    print("The plot was save as an image named async_plot.png")
+
+    return 
+
 if __name__ == '__main__':
     stock_values = asyncio.run(get_stock_value())
+    
+    ticker_values, previous_close_values, moving_average_values = stock_values[0], stock_values[1], stock_values[2]
+
+    create_data_frame(ticker_values,previous_close_values, moving_average_values)
