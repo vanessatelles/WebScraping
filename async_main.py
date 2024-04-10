@@ -101,5 +101,22 @@ async def get_stock_value():
     previous_close_values, moving_average_values = await asyncio.gather(previous_close(ticker_values), moving_average(ticker_values))
     return ticker_values, previous_close_values, moving_average_values
 
+def create_data_frame(ticker_values, previous_close_values, moving_average_values):
+
+    df = pd.DataFrame(list(zip(previous_close_values, ticker_values)),
+                columns =['Previous Close', 'Ticker'])
+
+    df['200-Day Moving Average 3'] = moving_average_values
+    df['is_cheap'] = np.where(df['Previous Close'] < df['200-Day Moving Average 3'], True, False)
+
+    condition = df['is_cheap'] == True
+
+    hist = df[condition].plot(kind='bar', x='Ticker', y='Previous Close').get_figure()
+    hist.savefig('async_plot.png')
+
+    print("The plot was save as an image named async_plot.png")
+
+    return 
+
 if __name__ == '__main__':
     stock_values = asyncio.run(get_stock_value())
