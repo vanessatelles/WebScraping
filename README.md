@@ -20,3 +20,4 @@
 - Rewrite README
 - Separate into files
 - Write a post about
+- Add requirements
