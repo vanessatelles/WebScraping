@@ -1,4 +1,4 @@
-# WebScraping
+# WebScraping a Wikipedia table
 
 
 1. Scrape the S&P 500 companies table from the following Wikipedia page:
