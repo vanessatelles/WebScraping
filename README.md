@@ -15,3 +15,8 @@
 1. Concatenate all dataframes for all ticker symbols in one.
 1. Display the dataframe on a plot only for the companies where ``is_cheap = True.``
 1. On the X axis should be the Ticker symbol and on the Y axis the Previous Close value.
+
+## To-do
+- Rewrite README
+- Separate into files
+- Write a post about
