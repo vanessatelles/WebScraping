@@ -10,3 +10,10 @@ This project performs web scraping to collect financial information about compan
 - **Fetch Previous Close Value**:
   For each of the 50 ticker symbols, we use the following URL to retrieve the previous close value:
   [Yahoo Finance](https://finance.yahoo.com/quote/AAPL?p=AAPLtsrc=fin-srch)
+- **Store Data in a Pandas DataFrame**:
+  The previous close values are stored along with their corresponding ticker symbols in a Pandas DataFrame.
+- **Fetch 200-Day Moving Average Value**:
+  For each company symbol, we use another URL to obtain the 200-day moving average:
+  [Yahoo Finance - Key Statistics](https://finance.yahoo.com/quote/AAPL/key-statistics?p=AAPL)
+- **Add Data to the DataFrame**:
+  The 200-day moving average values are added to the same DataFrame.
