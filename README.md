@@ -17,3 +17,9 @@ This project performs web scraping to collect financial information about compan
   [Yahoo Finance - Key Statistics](https://finance.yahoo.com/quote/AAPL/key-statistics?p=AAPL)
 - **Add Data to the DataFrame**:
   The 200-day moving average values are added to the same DataFrame.
+- **Compute an "is_cheap" Column**:
+  A new column called "is_cheap" is created to indicate whether the previous close is lower than the 200-day moving average. If it's lower, the value is `True`; otherwise, it's `False`.
+- **Concatenate DataFrames and Visualize Data**:
+  All individual DataFrames are concatenated into a single DataFrame. Then, we create a plot for the companies where "is_cheap" is `True`. On the X-axis, we place the ticker symbols, and on the Y-axis, the previous close value.
+
+This process quickly identifies the companies in the S&P 500 that may be considered "cheap" relative to their 200-day moving average. The result is a visually intuitive plot showing these companies, helping with financial analysis or investment decision-making.
