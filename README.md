@@ -1,6 +1,14 @@
 # Web Scraping a Wikipedia table
 
-This project performs web scraping to collect financial information about companies in the S&P 500 index. The goal is to identify which companies have a previous closing price below their 200-day moving average. Here's an overview of the process:
+This project performs web scraping to collect financial information about companies in the S&P 500 index. The goal is to identify which companies have a previous closing price below their 200-day moving average. Two versions of the code were implemented: one synchronous and one asynchronous.
+
+## Synchronous and Asynchronous Code
+
+Two versions of the code were created for this project: a synchronous version and an asynchronous version. The synchronous code executes tasks sequentially, while the asynchronous code can perform multiple tasks simultaneously, improving efficiency when dealing with numerous network requests.
+
+The asynchronous code is ideal for high-latency operations, such as multiple HTTP requests, allowing concurrent execution to reduce waiting times. This is especially useful when scraping large datasets or multiple endpoints. However, synchronous code is often simpler and easier to understand, which might be helpful for smaller datasets or simpler use cases.
+
+## Overview of the process:
 
 - **Data Collection from Wikipedia**:
   The first step is to scrape a table from Wikipedia with a list of companies in the S&P 500 index. The link used for this is:
