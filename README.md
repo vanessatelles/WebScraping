@@ -31,3 +31,8 @@ The asynchronous code is ideal for high-latency operations, such as multiple HTT
   All individual DataFrames are concatenated into a single DataFrame. A plot is then created for the companies where "is_cheap" is `True`. The X-axis represents the ticker symbols, and the Y-axis represents the previous close value.
 
 This process quickly identifies the companies in the S&P 500 that may be considered "cheap" relative to their 200-day moving average. The result is a visually intuitive plot showing these companies, helping with financial analysis or investment decision-making.
+<div align="center"> 
+  
+![plot](https://github.com/vanessatelles/WebScraping/assets/15792134/bb2bc123-f156-40d4-93fb-5359e343d427)
+
+</div> 
